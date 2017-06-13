@@ -47,7 +47,8 @@ fi
 
 ### Now comes the GMT part
 ## Make a color scheme.
-gmt makecpt -C$col -T${minR}/${maxR} >col.cpt 
+# The -Q makes a logarithmically interpolated color scheme
+gmt makecpt -C$col -T${minR}/${maxR}/3 -D -Qo -Z > col.cpt 
 
 ## Plot the rectangles
 gmt psxy $1 -Ccol.cpt -JX$width/-$height -R${minX}/${maxX}/${minY}/${maxY} -Bx1+l"electrode number" -By1 -BN  -Sr -K > $2
