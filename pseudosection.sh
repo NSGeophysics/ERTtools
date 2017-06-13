@@ -19,8 +19,8 @@
 ## Also, set these variables if you like
 width=17c
 height=5c
-#col=polar
-col=jet
+col=polar
+#col=jet
 
 ## Calculating the max and min x and y
 # For min x position and max x position, we want tosubtract and add the rectangle width
