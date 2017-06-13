@@ -19,7 +19,8 @@
 ## Also, set these variables if you like
 width=17c
 height=5c
-col=polar
+#col=polar
+col=jet
 
 ## Calculating the max and min x and y
 # For min x position and max x position, we want tosubtract and add the rectangle width
@@ -52,7 +53,7 @@ gmt makecpt -C$col -T${minR}/${maxR} >col.cpt
 gmt psxy $1 -Ccol.cpt -JX$width/-$height -R${minX}/${maxX}/${minY}/${maxY} -Bx1+l"electrode number" -By1 -BN  -Sr -K > $2
 
 ## Plot the color bar
-gmt psscale -Dx0c/-0.5c+w${width}/0.4c+h -Ccol.cpt -O >> $2 
+gmt psscale -Dx0c/-0.5c+w${width}/0.4c+h+e -Ccol.cpt -O >> $2 
 
 gmt psconvert -A0.1c -Tf -P $2
 
