@@ -12,7 +12,7 @@ function OHM2APR(inputname,outputname,measnums)
 % outputname   filename for the .apr file
 % measnums     measurement numbers that you want to include  
 %
-% Last modified by plattner-at-alumni.ethz.ch, 6/13/2017
+% Last modified by plattner-at-alumni.ethz.ch, 9/18/2017
 
 widthfact=0.5;  
 heightfact=0.2;
@@ -32,13 +32,23 @@ electrodes=nan(nelec,3);
 strin=fgetl(fin);
 
 % Read all the electrodes
+twod=false;
 for counter=1:nelec
     strin=fgets(fin);
-    red=sscanf(strin,'%f %f %f');
+    red=sscanf(strin,'%f %f %f');    
     electrodes(counter,1)=red(1);
     electrodes(counter,2)=red(2);
-    electrodes(counter,3)=red(3);
+    try
+    	electrodes(counter,3)=red(3);
+    catch
+    	% It's 2D, hence
+    	twod=true;	
+	end
 end
+
+if twod
+	electrodes=electrodes(1:end,1:2);
+end	
 
 % Now the measurements
 strin=fgets(fin);
@@ -100,6 +110,6 @@ boxwidths=widthfact*ones(size(measurements,1),1);
 boxheights=heightfact*ones(size(measurements,1),1);
 
 
-dlmwrite(outputname,[xpos,ypos,measurements(:,5)./measurements(:,6),boxwidths,boxheights],'\t')
+dlmwrite(outputname,[xpos,ypos,abs(measurements(:,5)./measurements(:,6)),boxwidths,boxheights],'\t')
 
 
