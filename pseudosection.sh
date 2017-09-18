@@ -54,7 +54,7 @@ gmt makecpt -C$col -T${minR}/${maxR}/3 -D -Qo -Z > col.cpt
 gmt psxy $1 -Ccol.cpt -JX$width/-$height -R${minX}/${maxX}/${minY}/${maxY} -Bx1+l"electrode number" -By1 -BN  -Sr -W -K > $2
 
 ## Plot the color bar
-gmt psscale -Dx0c/-0.5c+w${width}/0.4c+h+e -Ccol.cpt -O >> $2 
+gmt psscale -Dx0c/-0.5c+w${width}/0.4c+h+e -Bx+l"apparent resistivity [@~W@~m]" -Ccol.cpt -O >> $2 
 
 gmt psconvert -A0.1c -Tf -P $2
 
